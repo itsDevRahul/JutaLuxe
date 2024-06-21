@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/JutaLuxe/static/css/main.a7e283d7.css",
-    "main.js": "/JutaLuxe/static/js/main.1ec81271.js",
-    "static/media/logo.svg": "/JutaLuxe/static/media/logo.bc6bb97efdc2c694421bb180f1826988.svg",
-    "index.html": "/JutaLuxe/index.html",
-    "main.a7e283d7.css.map": "/JutaLuxe/static/css/main.a7e283d7.css.map",
-    "main.1ec81271.js.map": "/JutaLuxe/static/js/main.1ec81271.js.map"
+    "main.css": "/static/css/main.a7e283d7.css",
+    "main.js": "/static/js/main.0025be07.js",
+    "static/media/logo.svg": "/static/media/logo.bc6bb97efdc2c694421bb180f1826988.svg",
+    "index.html": "/index.html",
+    "main.a7e283d7.css.map": "/static/css/main.a7e283d7.css.map",
+    "main.0025be07.js.map": "/static/js/main.0025be07.js.map"
   },
   "entrypoints": [
     "static/css/main.a7e283d7.css",
-    "static/js/main.1ec81271.js"
+    "static/js/main.0025be07.js"
   ]
 }
