@@ -1,7 +1,7 @@
 {
   "name": "jutaluxe",
   "version": "0.1.0",
-  "homepage": "https://jutaluxe.infinityfreeapp.com/",
+  "homepage": "https://itsdevrahul.github.io/JutaLuxe",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
