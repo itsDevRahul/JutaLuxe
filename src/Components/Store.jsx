@@ -65,6 +65,8 @@ export default function Store() {
             }
             if (selectedCat !== '') {
                 navigate('/' + selectedCat);
+            } else {
+                navigate('/');
             }
         }, [selectedCat]
     )
@@ -231,12 +233,18 @@ export default function Store() {
 
 
 function Item({ data }) {
-    const { getImg, showToast } = useContext(MainContext);
+    const { getImgs, showToast } = useContext(MainContext);
+    const random = Math.floor(Math.random() * 9);
+    var img;
+    if (getImgs(random) !== undefined) {
+        img = getImgs(random)[4]
+    }
+
     return (
 
         <div className={`relative bg-cover row-span-3 p-0 bg-gray-100 group rounded-3xl bg-center overflow-hidden mx-auto sm:mr-0 xl:mx-auto`} >
-            <Link to={'/product/' + data.id}>
-                <img src={getImg(data.images[3], 512)} alt="Shoes" className="z-20 sm:group-hover:scale-110 sm:group-hover:-translate-y-4 duration-500" />
+            <Link to={'/product/' + data.id + '/' + random}>
+                <img src={img} alt="Shoes" className="z-20 sm:group-hover:scale-110 sm:group-hover:-translate-y-4 duration-500" />
             </Link>
             <div className="absolute z-10 top-3 left-0 mx-3 p-3 bg-white/85 w-[calc(100%-24px)] rounded-xl shadow-sm shadow-transparent transition-all duration-400 sm:group-hover:-translate-y-24">
                 <div className="flex items-center justify-between gap-2 mb-2">

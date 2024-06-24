@@ -30,10 +30,6 @@ export default function OrderSummary() {
         return nextDay.toDateString();
     }
 
-    function getImg(imgData, size) {
-        return `http://demandware.edgesuite.net/sits_pod20-adidas/dw/image/v2/aaqx_prd/on/demandware.static/-/Sites-adidas-products/en_US/${imgData.id}/zoom/${imgData.fileName}?sh=${size}`;
-    }
-
     return (
         <section className="py-12 lg:py-24 relative">
             <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
@@ -87,7 +83,7 @@ export default function OrderSummary() {
                                 return <div key={i} className="grid grid-cols-7 w-full pb-6 border-b border-gray-100">
                                     <div className="col-span-7 min-[500px]:col-span-2 md:col-span-1">
                                         <img
-                                            src={getImg(d.product.images[3], 128)}
+                                            src={d.product.image}
                                             alt="Shoes image"
                                         />
                                     </div>
@@ -157,6 +153,5 @@ export default function OrderSummary() {
                 </div>
             </div>
         </section>
-
     )
 }

@@ -9,7 +9,7 @@ export default function RecommendedProducts() {
     function filter() {
         let a = products?.filter(
             (d) => { return d.recommended == "true" }
-        )
+        );
         setItems([...a]);
     }
 
@@ -18,14 +18,11 @@ export default function RecommendedProducts() {
             if (products.length != 0) {
                 filter();
             }
-
         }, [products]
     )
 
-
-
     return (
-        <section className="sm:py-12 py-8 bg-creamy">
+        <section className={`${products.length == 0 ? 'hidden' : ''} sm:py-12 py-8 bg-creamy`}>
             <h2 className="font-semibold text-center md:text-2xl md:pb-2">RECOMMENDED PRODUCTS</h2>
             <div onClick={() => filter()} className="container mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-3 md:grid-cols-2 gap-9 my-9">
                 {
@@ -41,13 +38,18 @@ export default function RecommendedProducts() {
 }
 
 function Item({ id, title, price, category, images }) {
-    const { getImg } = useContext(MainContext);
+    const { getImgs } = useContext(MainContext);
+    const random = Math.floor(Math.random() * 9);
+    var img;
+    if (getImgs(random) !== undefined) {
+        img = getImgs(random)[4]
+    }
 
     return (
-        <Link to={'/product/' + id} className="rounded-md flex items-center gap-4 px-8 py-10 hover:shadow-lg duration-300 relative bg-white overflow-hidden">
+        <Link to={'/product/' + id + '/' + random} className="rounded-md flex items-center gap-4 px-8 py-10 hover:shadow-lg duration-300 relative bg-white overflow-hidden">
             <div className="bg-light-brown rounded-br-lg text-white text-sm font-semibold py-1 px-3 absolute top-0 left-0">NEW</div>
             <div className="">
-                <img src={getImg(images[3], 128)} className="rounded" />
+                <img src={img} className="rounded " width={100} />
             </div>
             <div>
                 <div className="font-semibold text-[14px]">{title} </div>

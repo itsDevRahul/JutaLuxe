@@ -113,10 +113,6 @@ export default function CheckOut() {
         setTotalPrice(total);
     }
 
-    function getImg(imgData, size) {
-        return `http://demandware.edgesuite.net/sits_pod20-adidas/dw/image/v2/aaqx_prd/on/demandware.static/-/Sites-adidas-products/en_US/${imgData.id}/zoom/${imgData.fileName}?sh=${size}`;
-    }
-
     return (
         <>
             <div className="flex flex-col sticky top-0 z-50 items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
@@ -256,7 +252,7 @@ export default function CheckOut() {
                                     return <div key={i} className="flex flex-col rounded-lg bg-white sm:flex-row">
                                         <img
                                             className="m-2 w-28 rounded-md border object-cover object-center"
-                                            src={getImg(d.product.images[3], 256)}
+                                            src={d.product.image}
                                             alt=""
                                         />
                                         <div className="flex w-full flex-col px-4 py-4">

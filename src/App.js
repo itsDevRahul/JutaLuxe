@@ -20,7 +20,7 @@ function App() {
           element: <Home />
         },
         {
-          path: "product/:id",
+          path: "product/:id/:img",
           element: <ProductView />
         },
         {

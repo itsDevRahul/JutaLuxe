@@ -9,6 +9,7 @@ export const ContextProvider = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [categories, setCategories] = useState(["Football Cleats", "Running Shoes", "Basketball Shoes"]);
     const [products, setProducts] = useState([]);
+    const [images, setImages] = useState([]);
     const [productList, setProductList] = useState([]);
     const [productList2, setProductList2] = useState([]); //for temp data store
     const [selectedCat, setSelectedCat] = useState("");
@@ -29,7 +30,15 @@ export const ContextProvider = ({ children }) => {
             })
             .catch((error) => {
             })
+
+        axios.get('https://namichand.github.io/fakeProduct/data/images.json')
+            .then((success) => {
+                setImages(success.data);
+            })
+            .catch((error) => {
+            })
     }
+
 
     function showToast(msg, flag) {
         // 1 - SUCCESS | 2 - ERROR | 3 - INFO
@@ -130,8 +139,10 @@ export const ContextProvider = ({ children }) => {
     }
 
     // Not recommended for commercial use. Use your own Images.
-    function getImg(imgData, size) {
-        return `http://demandware.edgesuite.net/sits_pod20-adidas/dw/image/v2/aaqx_prd/on/demandware.static/-/Sites-adidas-products/en_US/${imgData.id}/zoom/${imgData.fileName}?sh=${size}`;
+    function getImgs(i) {
+        if (images.length !== 0) {
+            return images[i];
+        }
     }
 
     function addToCart(data) {
@@ -222,7 +233,7 @@ export const ContextProvider = ({ children }) => {
 
     return (
         <MainContext.Provider value={{
-            isOpen, setIsOpen, categories, products, getImg, search, searchParams, productList, setProductList, productList2,
+            isOpen, setIsOpen, categories, products, getImgs, images, search, searchParams, productList, setProductList, productList2,
             setProductList2, catFilter, shortByName, selectedCat, setSelectedCat, selectedPriceRange, setSelectedPriceRange, selectedSortBy,
             setSelectedSortBy, loadItems, setLoadItems, cartProducts, setCartProducts, addToCart, showToast
         }}>

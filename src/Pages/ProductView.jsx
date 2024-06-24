@@ -7,11 +7,11 @@ import RecommendedProducts from "../Components/RecommendedProducts";
 export default function ProductView() {
     const [selectedImg, setSelectedImg] = useState(3);
     const [selectedSize, setSelectedSize] = useState(null);
-    const [imageLoaded, setImageLoaded] = useState(false);
+    const [imageLoaded, setImageLoaded] = useState(2);
     const [imageList, setImageList] = useState([]);
-    const { products, getImg, addToCart, showToast } = useContext(MainContext);
+    const { products, getImgs, images, addToCart, showToast } = useContext(MainContext);
     const [data, setData] = useState({});
-    const { id } = useParams();
+    const { id, img } = useParams();
 
     function sendToCart() {
         if (selectedSize !== null) {
@@ -24,9 +24,9 @@ export default function ProductView() {
 
     useEffect(
         () => {
-            if (products) {
+            if (products.length !== 0) {
                 let product = products.find((d) => d.id == id);
-                setData(product);
+                setData({ ...product });
             }
         }, [products]
     )
@@ -37,13 +37,30 @@ export default function ProductView() {
                 let product = products.find((d) => d.id == id);
                 setData(product);
             }
-        }, [id]
+            if (images.length !== 0) {
+                setImageList([...getImgs(img)]);
+            }
+        }, [id, img]
     )
 
     useEffect(
         () => {
-            setImageList(data?.images);
-        }, [data]
+            if (images.length !== 0) {
+                setImageList([...getImgs(img)]);
+            }
+        }, [images]
+    )
+
+    useEffect(
+        () => {
+            if (imageList.length !== 0) {
+                let image = imageList[4];
+                let d = { ...data };
+                d.image = image;
+                d.imgIndex = img;
+                setData({ ...d });
+            }
+        }, [imageList]
     )
 
     return (
@@ -52,10 +69,10 @@ export default function ProductView() {
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col lg:flex-row -mx-4">
                         <div className="lg:flex-1 px-4 lg:w-6/12">
-                            <div className="relative w-full rounded-lg bg-gray-300 mb-4 overflow-hidden">
+                            <div className={`${imageLoaded == 2 ? 'h-[400px]' : ''} relative w-full rounded-lg bg-gray-300 mb-4 overflow-hidden`}>
                                 <img
                                     className="w-full h-full object-cover"
-                                    src={`${imageList != undefined && imageList?.length > 0 ? getImg(imageList[selectedImg], 512) : ''}`}
+                                    src={`${imageList != undefined && imageList?.length > 0 ? imageList[selectedImg] : ''}`}
                                     alt="Loading Image.."
                                     onLoad={() => setImageLoaded(true)}
                                 />
@@ -82,7 +99,7 @@ export default function ProductView() {
                                                 }} className={`${selectedImg == i ? 'border-2 border-light-brown/50' : ''} lg:size-[100px] size-[70px] rounded-lg bg-gray-300 mb-4 overflow-hidden hover:opacity-90 cursor-pointer`}>
                                                     <img
                                                         className="w-full h-full object-cover"
-                                                        src={getImg(d, 256)}
+                                                        src={imageList[i]}
                                                         alt="Loading Image.."
                                                     />
                                                 </div>

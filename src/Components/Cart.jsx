@@ -96,7 +96,7 @@ export default function Cart() {
                         </div>
                 }
 
-                <div onClick={()=> navigateToPage('/Running%20Shoes')} className="opacity-70 hover:opacity-100 duration-200 cursor-pointer pb-4">
+                <div onClick={() => navigateToPage('/Running Shoes')} className="opacity-70 hover:opacity-100 duration-200 cursor-pointer pb-4">
                     <img src="https://i.ytimg.com/vi/IEmlz_uqXbc/maxresdefault.jpg" alt="" />
                 </div>
             </div>
@@ -105,23 +105,23 @@ export default function Cart() {
 }
 
 function Item({ data, qty, size, delCart, incQty, decQty }) {
-    const { getImg, setIsOpen } = useContext(MainContext);
+    const { setIsOpen } = useContext(MainContext);
     const navigate = useNavigate();
 
-    function navigateToProduct(id) {
+    function navigateToProduct(id, index) {
         setIsOpen(false);
-        navigate('/product/' + id);
+        navigate('/product/' + id + '/' + index);
     }
 
     return (
         <div className="flex h-[75px] my-4 pt-4">
-            <div onClick={() => navigateToProduct(data.id)} className="relative cursor-pointer group h-full">
-                <img src={getImg(data.images[3], 64)} alt="" />
+            <div onClick={() => navigateToProduct(data.id, data.imgIndex)} className="relative cursor-pointer group h-full">
+                <img src={data.image} alt="" className="h-full" />
                 <div className="absolute top-0 h-full w-full bg-white/80 text-sm flex items-center justify-center group-hover:opacity-100 opacity-0 duration-300">S : {size}</div>
             </div>
             <div className="w-full ps-4 flex flex-col justify-between">
                 <div className="flex items-start justify-between">
-                    <div onClick={() => navigateToProduct(data.id)} className="text-light-brown max-h-[40px] w-10/12 text-sm overflow-hidden cursor-pointer">{data.title}</div>
+                    <div onClick={() => navigateToProduct(data.id, data.imgIndex)} className="text-light-brown max-h-[40px] w-10/12 text-sm overflow-hidden cursor-pointer">{data.title}</div>
                     <button onClick={() => delCart(data.id, size)} className="text-3xl text-gray-400"><IoCloseCircleOutline /></button>
                 </div>
                 <div className="flex justify-between items-end">
